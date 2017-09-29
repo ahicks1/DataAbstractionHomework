@@ -28,7 +28,19 @@ int main() {
 
   LinkedList<int> newList = lst;
   cout << "Copy Constructor\n";
-  cout << "elem at 3" << lst[3] << endl;
+  cout << "elem at 3 = " << lst[3] << endl;
+  cout << "insert at 4 " << endl;
+  lst[4] = 9;
+  auto itr = lst.begin();
+  itr++;
+  itr++;
+  itr++;
+  lst.insert(itr,99);
+  lst.erase(--itr);
+  cout << "elem at 3 = " << lst[3] << endl;
+  for(auto elem:lst){
+    cout<<elem<<endl;
+  }
   cout << "Clear List\n";
   lst.clear();
   for(auto elem:lst){

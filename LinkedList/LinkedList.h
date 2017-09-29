@@ -96,7 +96,7 @@ class LinkedList {
 
                 LinkedList() {
                   cout << "Constructor\n";
-                  snt = new Node();
+                  snt = new Node;
                   snt->next = snt;
                   snt->prev = snt;
                   length = 0;
@@ -104,7 +104,7 @@ class LinkedList {
                 }
                 LinkedList(const LinkedList &al) { //TODO make const input
                   cout << "copy constructor\n";
-                  snt = new Node();
+                  snt = new Node;
                   Node * rover = snt;
                   for(auto elem:al) {
                     Node * tmp = new Node();
@@ -172,7 +172,7 @@ class LinkedList {
 template<typename T>
 void LinkedList<T>::push_back(const T &t) {
   cout <<"push_back "<<t<<"\n";
-  Node * tmp = new Node();
+  Node * tmp = new Node;
   tmp->next=snt;
   tmp->prev=snt->prev;
   snt->prev->next = tmp;
@@ -225,16 +225,18 @@ template<typename T>
 typename LinkedList<T>::iterator LinkedList<T>::erase(typename LinkedList<T>::iterator position) {
   cout << "erase\n";
   Node * rm = position.itr;
+  auto ret = position++;
   rm->prev->next = rm->next;
   rm->next->prev = rm->prev;
   delete rm;
   length -= 1;
+  return iterator(ret);
 }
 
 template<typename T>
 const T& LinkedList<T>::operator[](int index) const {
   auto rover = snt;
-  for(int i = 0; i<index; ++i) {
+  for(int i = 0; i<=index; ++i) {
     rover = rover->next;
   }
   cout << " const []"<<rover->data<<"\n";
@@ -244,7 +246,7 @@ const T& LinkedList<T>::operator[](int index) const {
 template<typename T>
 T& LinkedList<T>::operator[](int index){
   auto rover = snt;
-  for(int i = 0; i<=index; ++i) {
+  for(int i = 0; i<index; ++i) {
     rover=rover->next;
   }
   cout << "[]"<<rover->data<<"\n";
