@@ -51,7 +51,7 @@ class BSTMap {
       }
       return node->par;
     }
-    
+
     void transplant(Node* dest, Node* src) {
       if (dest->par == nullptr) {
         root = src;
@@ -178,6 +178,8 @@ public:
         clear();
     }
     BSTMap(const BSTMap<K,V> &that) {
+        root = nullptr;
+        sz = 0;
         for (auto p: that)insert(p);
     }
 
@@ -257,10 +259,9 @@ public:
     iterator erase(const_iterator position) {
       auto ptr = position.ptr;
       auto ret = iterator(ptr);
-      ++ret;
+      --ret;
       if(ptr->left == nullptr){
         transplant(ptr,ptr->right);
-        ptr = nullptr;
       } else if(ptr->right == nullptr) {
         transplant(ptr,ptr->left);
       } else {
@@ -279,7 +280,7 @@ public:
       sz--;
       delete ptr;
       ptr = nullptr;
-      return ret;
+      return ++ret;
     }
 
     unsigned int erase(const key_type& k) {
