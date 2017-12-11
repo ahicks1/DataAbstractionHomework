@@ -1,4 +1,5 @@
 #import <iostream>
+#import <string>
 #import "LinkedList.h"
 
 using namespace std;
@@ -19,11 +20,6 @@ int main() {
   while(witr != lst.cend()){
       cout<< *(witr++);
   }
-  cout << endl;
-  witr = lst.begin();
-  while(witr != lst.end()){
-      cout<< *(++witr);
-  }
 
 
   LinkedList<int> newList = lst;
@@ -36,7 +32,8 @@ int main() {
   itr++;
   itr++;
   lst.insert(itr,99);
-  lst.erase(--itr);
+  itr = lst.erase(itr);
+  cout << *itr <<endl;
   cout << "elem at 3 = " << lst[3] << endl;
   for(auto elem:lst){
     cout<<elem<<endl;
@@ -50,6 +47,25 @@ int main() {
     cout<<elem<<endl;
   }
 
+  LinkedList<string> strlst = LinkedList<string>();
+  for(int i = 0; i<20; i++) {
+    strlst.push_back("Hello");
+  }
+  for(auto elem:strlst) {
+    cout << elem;
+  }
+  cout <<endl;
+
+  LinkedList<int> biglst;
+  for(int i = 0; i<20000; i++) {
+    biglst.push_back(i);
+  }
+  bool passed = true;
+  for(int i = 0; i<20000; i++)
+  {
+    if(biglst[i] != i) passed = false;
+  }
+  cout << (passed ? "True" : "False") << endl;
 
 
 
